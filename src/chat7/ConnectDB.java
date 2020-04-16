@@ -14,10 +14,10 @@ public abstract class ConnectDB {
 	 멤버변수 : 상속받은 하위클래스에서의 접근을 허용하기 위해 
 	  		접근지정자는 protected로 선언
 	 */
-   protected Connection con;
+   protected static Connection con;
    protected Statement stmt;
    protected ResultSet rs;
-   public PreparedStatement psmt;
+   public static PreparedStatement psmt;
 
    
    //UpdateSQL에서 사용할 인자생성자

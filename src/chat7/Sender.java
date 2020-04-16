@@ -4,7 +4,10 @@ import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.Socket;
 import java.net.URLEncoder;
+import java.util.Iterator;
 import java.util.Scanner;
+
+import org.omg.PortableInterceptor.Interceptor;
 
 //클라이언트가 입력한 메세지를 서버로 전송해주는 쓰레드 클래스
 public class Sender extends Thread{
@@ -12,7 +15,8 @@ public class Sender extends Thread{
 	Socket socket;
 	PrintWriter out = null;
 	String name;
-	
+	MultiServer multiServer =new MultiServer();
+
 	//생성자에서 output스트림을 생성한다
 	public Sender(Socket socket, String name) {
 
@@ -29,8 +33,8 @@ public class Sender extends Thread{
 		Scanner s =new Scanner(System.in);
 		try {
 			//클라이언트가 입력한 "대화명"을 서버로 전송한다
-			
-			
+
+
 			out.println(URLEncoder.encode(name,"UTF-8"));
 			//out.println(name);
 			//Q를 입력하기전까지의 메세지를 서버로 전송한다.
@@ -44,6 +48,7 @@ public class Sender extends Thread{
 						out.println(URLEncoder.encode(s2,"UTF-8"));
 						//out.println(s2);
 					}
+					
 				} catch (Exception e) {
 					System.out.println("예외>Sender>run1:"+e);
 				}
@@ -52,8 +57,8 @@ public class Sender extends Thread{
 			out.close();
 			socket.close();
 		}catch (UnsupportedEncodingException e1) {
-	    	  
-	      }
+
+		}
 		catch (Exception e) {
 			System.out.println("예외>Sender>run2: "+e);
 		}
